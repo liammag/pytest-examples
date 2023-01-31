@@ -1,0 +1,24 @@
+name: Python application
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10.x
+          
+      - name: Install pipenv
+        run: python3 -m pip install pipenv
+        
+      - name: Run tests
+        run: |
+          pipenv install --dev
+          pipenv run pytest
